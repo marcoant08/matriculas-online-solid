@@ -3,7 +3,6 @@ import { MemoryClassroomRepository } from "../../infra/repository/memory.classro
 import { MemoryEnrollmentRepository } from "../../infra/repository/memory.enrollment.repository";
 import { MemoryStudentRepository } from "../../infra/repository/memory.student.repository";
 import { CreateEnrollmentUseCase } from "./create-enrollment.use-case";
-import { CreateStudentUseCase } from "./create-student.use-case";
 
 describe("Delete enrollment use case", () => {
   it("should to be able to delete a enrollment", async () => {
