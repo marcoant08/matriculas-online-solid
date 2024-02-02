@@ -26,7 +26,6 @@ export interface ControllerResponse {
   headers?: any;
 }
 
-// interfaces de controller
 export interface ControllerProps {
   end?: () => void;
   body?: any;
