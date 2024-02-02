@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
+    "dev": "ts-node-dev src/infra/http/express.ts",
     "test": "jest",
     "test:cov": "jest --coverage"
   },
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.9.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "yup": "^1.3.3"
   }
 }
