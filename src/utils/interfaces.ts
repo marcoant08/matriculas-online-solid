@@ -1,3 +1,8 @@
+export interface UserProps {
+  username: string;
+  password: string;
+}
+
 export interface StudentProps {
   name: string;
   email: string;
