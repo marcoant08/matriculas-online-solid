@@ -19,10 +19,6 @@ export class MemoryStudentRepository implements IStudentRepository {
     return student ?? null;
   }
 
-  async getAll() {
-    return this.students;
-  }
-
   async create(student: Student) {
     this.students.push(student);
     return student;

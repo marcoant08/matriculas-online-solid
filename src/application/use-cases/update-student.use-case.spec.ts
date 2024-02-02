@@ -125,13 +125,12 @@ describe("Delete student use case", () => {
     const deleteStudent = new DeleteStudentUseCase(studentRepository);
 
     // deleta aluno
-    const studendId = student.id;
-    await deleteStudent.execute(studendId);
+    const studentId = student.id;
+    await deleteStudent.execute(studentId);
 
     // atualiza nome do aluno
     const sut = new UpdateStudentUseCase(studentRepository);
 
-    const studentId = student.id;
     const updates = { name: "Joãozinho" };
     const promise = sut.execute(studentId, updates);
 

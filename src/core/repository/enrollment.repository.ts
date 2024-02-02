@@ -1,6 +1,7 @@
 import Enrollment from "../entity/enrollment.entity";
 
 export default interface IEnrollmentRepository {
+  get: (id: string) => Promise<Enrollment | null>;
   getByClassroomId: (classroomId: string) => Promise<Enrollment[]>;
   getByClassroomAndStudent: (
     classroomId: string,

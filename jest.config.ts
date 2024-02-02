@@ -3,7 +3,12 @@ import type { Config } from "jest";
 const config: Config = {
   clearMocks: true,
   coverageProvider: "v8",
-  coveragePathIgnorePatterns: ["/node_modules/", "/build/", "/src/infra/"],
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "/build/",
+    "/dist/",
+    "/src/infra/",
+  ],
   transform: {
     "^.+\\.(t|j)sx?$": [
       "@swc/jest",

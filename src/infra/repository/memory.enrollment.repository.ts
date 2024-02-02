@@ -7,18 +7,25 @@ export class MemoryEnrollmentRepository implements IEnrollmentRepository {
 
   constructor() {}
 
+  async get(enrollmentId: string) {
+    const enrollment = this.enrollments.find((c) => {
+      return c.id === enrollmentId;
+    });
+    return enrollment ?? null;
+  }
+
   async getByClassroomId(classroomId: string) {
-    const classroom = this.enrollments.filter((c) => {
+    const enrollment = this.enrollments.filter((c) => {
       return c.classroomId === classroomId;
     });
-    return classroom;
+    return enrollment;
   }
 
   async getByClassroomAndStudent(classroomId: string, studentId: string) {
-    const classroom = this.enrollments.find((c) => {
+    const enrollment = this.enrollments.find((c) => {
       return c.classroomId === classroomId && c.studentId === studentId;
     });
-    return classroom ?? null;
+    return enrollment ?? null;
   }
 
   async create(enrollment: Enrollment) {
