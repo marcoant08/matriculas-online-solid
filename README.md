@@ -14,9 +14,10 @@ Também foram implementados **Testes** com **Jest**
 Crie um arquivo .env e cole as variáveis a seguir (essas variáveis podem ser alteradas):
 
 ```
-POSTGRES_USER=admin
-POSTGRES_PASSWORD=admin
-POSTGRES_DB=enrollments-db
+POSTGRES_USER="admin"
+POSTGRES_PASSWORD="admin"
+POSTGRES_DB="enrollments-db"
+DATABASE_URL="postgresql://admin:admin@localhost:5434/enrollments-db"
 ```
 
 ## Como executar a aplicação
@@ -31,6 +32,15 @@ Execute os comandos a seguir:
 > npm run dev
 ```
 
+## Autenticação da API
+
+Todos os endpoints da aplicação estão configurados com Basic Authorization com as seguintes credenciais:
+
+```
+username: admin
+password: admin
+```
+
 ## Como executar os testes
 
 Para testar, execute os comandos a seguir:
@@ -40,7 +50,7 @@ Para testar, execute os comandos a seguir:
 > npm run test
 ```
 
-Para testar e apresentar a cobertura de código, execute os comandos a seguir:
+Para testar e apresentar a cobertura de código (que está 100%), execute os comandos a seguir:
 
 ```
 > npm install
