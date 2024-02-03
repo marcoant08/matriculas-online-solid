@@ -21,6 +21,7 @@ export class CreateStudentController {
       return {
         statusCode: 201,
         data: {
+          success: true,
           message: "Student created successfully",
           student,
         },
@@ -28,7 +29,10 @@ export class CreateStudentController {
     } catch (e: any) {
       return {
         statusCode: e.statusCode || 500,
-        data: { message: e.message || "Internal Server Error" },
+        data: {
+          success: false,
+          message: e.message || "Internal Server Error",
+        },
       };
     }
   }
