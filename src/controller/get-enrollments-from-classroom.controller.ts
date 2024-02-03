@@ -9,12 +9,9 @@ export class GetEnrollmentsFromClassroomController {
 
   async execute(props: ControllerProps): Promise<ControllerResponse> {
     try {
+      await this.validate(props);
+
       const classroomId = props.params?.path?.classroomId as string;
-
-      if (!classroomId) {
-        throw new ValidationException("classroomId is missing");
-      }
-
       const enrollments = await this.getEnrollmentsFromClassroomUseCase.execute(
         classroomId
       );
@@ -35,6 +32,14 @@ export class GetEnrollmentsFromClassroomController {
           message: e.message || "Internal Server Error",
         },
       };
+    }
+  }
+
+  async validate(props: ControllerProps) {
+    const classroomId = props.params?.path?.classroomId as string;
+
+    if (!classroomId) {
+      throw new ValidationException("classroomId is missing");
     }
   }
 }

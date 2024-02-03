@@ -9,7 +9,7 @@ export class CreateEnrollmentController {
 
   async execute(props: ControllerProps): Promise<ControllerResponse> {
     try {
-      await validateCreateEnrollmentRequest(props);
+      await this.validate(props);
 
       const data = {
         studentId: props.body.studentId,
@@ -35,5 +35,9 @@ export class CreateEnrollmentController {
         },
       };
     }
+  }
+
+  async validate(props: ControllerProps) {
+    await validateCreateEnrollmentRequest(props);
   }
 }

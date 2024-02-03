@@ -9,12 +9,9 @@ export class DeleteEnrollmentController {
 
   async execute(props: ControllerProps): Promise<ControllerResponse> {
     try {
+      await this.validate(props);
+
       const enrollmentId = props.params?.path?.enrollmentId as string;
-
-      if (!enrollmentId) {
-        throw new ValidationException("enrollmentId is missing");
-      }
-
       await this.deleteEnrollmentUseCase.execute(enrollmentId);
 
       return {
@@ -32,6 +29,14 @@ export class DeleteEnrollmentController {
           message: e.message || "Internal Server Error",
         },
       };
+    }
+  }
+
+  async validate(props: ControllerProps) {
+    const enrollmentId = props.params?.path?.enrollmentId as string;
+
+    if (!enrollmentId) {
+      throw new ValidationException("enrollmentId is missing");
     }
   }
 }

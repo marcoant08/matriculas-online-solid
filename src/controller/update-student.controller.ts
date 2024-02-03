@@ -1,5 +1,6 @@
 import { UpdateStudentDTO } from "../application/dto/update-user.dto";
 import IUpdateStudentUseCase from "../core/use-case/update-student.use-case";
+import ValidationException from "../utils/exceptions/validation.exception";
 import { ControllerProps, ControllerResponse } from "../utils/interfaces";
 import { validateUpdateStudentRequest } from "../utils/validations/update-student.validation";
 
@@ -8,7 +9,7 @@ export class UpdateStudentController {
 
   async execute(props: ControllerProps): Promise<ControllerResponse> {
     try {
-      await validateUpdateStudentRequest(props);
+      await this.validate(props);
 
       const data: UpdateStudentDTO = {};
       if (props.body.name) data["name"] = props.body.name;
@@ -35,6 +36,15 @@ export class UpdateStudentController {
           message: e.message || "Internal Server Error",
         },
       };
+    }
+  }
+
+  async validate(props: ControllerProps) {
+    await validateUpdateStudentRequest(props);
+
+    // body deve ter pelo menos um dos campos atualizáveis
+    if (props.body.name && !props.body.email) {
+      throw new ValidationException("No valid fields were submitted");
     }
   }
 }

@@ -7,7 +7,7 @@ export class CreateStudentController {
 
   async execute(props: ControllerProps): Promise<ControllerResponse> {
     try {
-      await validateCreateStudentRequest(props);
+      await this.validate(props);
 
       const data = {
         name: props.body.name,
@@ -35,5 +35,9 @@ export class CreateStudentController {
         },
       };
     }
+  }
+
+  async validate(props: ControllerProps) {
+    await validateCreateStudentRequest(props);
   }
 }
