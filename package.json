@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "seed": "ts-node prisma/seed.ts",
     "dev": "ts-node-dev src/infra/http/express.ts",
     "test": "jest",
     "test:cov": "jest --coverage"

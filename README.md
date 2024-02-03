@@ -27,7 +27,7 @@ Execute os comandos a seguir:
 > npm install
 > docker-compose up
 > npx prisma migrate dev
-> npx prisma generate
+> npm run seed
 > npm run dev
 ```
 
