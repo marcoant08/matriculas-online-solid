@@ -7,7 +7,7 @@ export class CreateStudentController {
 
   async execute(props: ControllerProps): Promise<ControllerResponse> {
     try {
-      await validateCreateStudentRequest(props.body);
+      await validateCreateStudentRequest(props);
 
       const data = {
         name: props.body.name,

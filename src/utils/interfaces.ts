@@ -31,24 +31,9 @@ export interface ControllerProps {
   body?: any;
   params?: {
     path?: {
-      establishmentId?: string;
-      boletoId?: string;
-      addressId?: string;
-      boletoOrderId?: string;
-      transferOrderId?: string;
-      shortUrlId?: string;
-      cep?: string;
+      studentId?: string;
     };
-    query?: {
-      userId?: string;
-      month?: string;
-      email?: string;
-    };
-  };
-  requestMetadata?: {
-    clientIP: string;
-    userAgent: string;
-    userId?: string;
+    query?: any;
   };
   headers?: any;
 }

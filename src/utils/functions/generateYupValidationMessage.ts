@@ -18,18 +18,18 @@ export const generateYupValidationMessage = (e: YupException): string => {
   if (!e.params) throw new Error("Erro de validação");
 
   const errorsStr = e.errors && e.errors.join(" | ");
-  const path = e.path ? `O campo ${e.path}` : "O body";
+  const path = e.path ?? "body";
 
   const typeMessages: Record<string, string> = {
-    matches: `${path} está em um formato inválido (esperado: ${e.params.regex})`,
-    email: `${path} deve conter um email válido`,
-    typeError: `${path} está com tipo inválido (esperado: ${e.params.type})`,
-    noUnknown: `${path} contém um campo desconhecido (${e.params.unknown})`,
-    oneOf: `${path} contém um valor inválido (permitidos: ${e.params.values})`,
-    required: `${path} deve ser enviado`,
-    min: `${path} não pode ser menor que ${e.params.min}`,
-    max: `${path} não pode ser maior que ${e.params.max}`,
+    matches: `${path} is in an invalid format (expected: ${e.params.regex})`,
+    email: `${path} must contain a valid email`,
+    typeError: `${path} has an invalid type (expected: ${e.params.type})`,
+    noUnknown: `${path} contains an unknown field (${e.params.unknown})`,
+    oneOf: `${path} contains an invalid value (allowed: ${e.params.values})`,
+    required: `${path} is required`,
+    min: `${path} cannot be less than ${e.params.min}`,
+    max: `${path} cannot be greater than ${e.params.max}`,
   };
 
-  return typeMessages[e.type] || `${path} ${errorsStr || "deve ser revisado"}`;
+  return typeMessages[e.type] || errorsStr || "must be reviewed";
 };
