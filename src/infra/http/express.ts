@@ -14,6 +14,8 @@ import { DeleteEnrollmentUseCase } from "../../application/use-cases/delete-enro
 import { DeleteEnrollmentController } from "../../controller/delete-enrollment.controller";
 import { GetEnrollmentsFromClassroomController } from "../../controller/get-enrollments-from-classroom.controller";
 import { GetEnrollmentsFromClassroomUseCase } from "../../application/use-cases/get-enrollments-from-classroom.use-case";
+import { GetClassroomsUseCase } from "../../application/use-cases/get-classrooms.use-case";
+import { GetClassroomsController } from "../../controller/get-classrooms.controller";
 const HTTP_PORT = 3333;
 
 const app = express();
@@ -108,6 +110,18 @@ app.get("/classroom/:classroomId/enrollments", async (req, res) => {
   const controllerResponse = await controller.execute({
     params: { path: req.params },
   });
+
+  return res
+    .status(controllerResponse.statusCode)
+    .json(controllerResponse.data);
+});
+
+app.get("/classroom", async (_, res) => {
+  const pgPrismaClassroomRepository = new PGPrismaClassroomRepository();
+  const useCase = new GetClassroomsUseCase(pgPrismaClassroomRepository);
+  const controller = new GetClassroomsController(useCase);
+
+  const controllerResponse = await controller.execute();
 
   return res
     .status(controllerResponse.statusCode)
