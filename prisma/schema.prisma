@@ -54,8 +54,8 @@ model Enrollment {
   created_at   DateTime @default(now())
   update_at    DateTime @updatedAt
 
-  student   Student   @relation(fields: [student_id], references: [id])
-  classroom Classroom @relation(fields: [classroom_id], references: [id])
+  student   Student   @relation(fields: [student_id], references: [id], onDelete: Cascade)
+  classroom Classroom @relation(fields: [classroom_id], references: [id], onDelete: Cascade)
 
   @@unique([student_id, classroom_id]) // the same student cannot enroll twice the same classroom
   @@map("enrollments")
