@@ -21,14 +21,20 @@ const data = [
 
 // implementação de repositório em memória para testes
 export class MemoryClassroomRepository implements IClassroomRepository {
-  private classrooms: Classroom[] = data.map((item) => {
-    return new Classroom({ name: item.name, teacher: item.teacher }, item.id);
-  });
+  private classrooms: Classroom[];
 
-  constructor() {}
+  constructor() {
+    this.classrooms = data.map((item) => {
+      return new Classroom({ name: item.name, teacher: item.teacher }, item.id);
+    });
+  }
 
   async get(id: string) {
     const classroom = this.classrooms.find((c) => c.id === id);
     return classroom ?? null;
+  }
+
+  async getAll() {
+    return this.classrooms;
   }
 }
