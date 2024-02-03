@@ -4,6 +4,8 @@ import { CreateStudentUseCase } from "../../application/use-cases/create-student
 import { CreateStudentController } from "../../controller/create-student.controller";
 import { UpdateStudentController } from "../../controller/update-student.controller";
 import { UpdateStudentUseCase } from "../../application/use-cases/update-student.use-case";
+import { DeleteStudentController } from "../../controller/delete-student.controller";
+import { DeleteStudentUseCase } from "../../application/use-cases/delete-student.use-case";
 const HTTP_PORT = 3333;
 
 const app = express();
@@ -30,6 +32,20 @@ app.patch("/student/:studentId", async (req, res) => {
 
   const controllerResponse = await controller.execute({
     body: req.body,
+    params: { path: req.params },
+  });
+
+  return res
+    .status(controllerResponse.statusCode)
+    .json(controllerResponse.data);
+});
+
+app.delete("/student/:studentId", async (req, res) => {
+  const pgPrismaStudentRepository = new PGPrismaStudentRepository();
+  const useCase = new DeleteStudentUseCase(pgPrismaStudentRepository);
+  const controller = new DeleteStudentController(useCase);
+
+  const controllerResponse = await controller.execute({
     params: { path: req.params },
   });
 
