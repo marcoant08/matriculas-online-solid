@@ -10,6 +10,8 @@ import { CreateEnrollmentUseCase } from "../../application/use-cases/create-enro
 import { PGPrismaEnrollmentRepository } from "../repository/pgprisma.enrollment.repository";
 import { CreateEnrollmentController } from "../../controller/create-enrollment.controller";
 import { PGPrismaClassroomRepository } from "../repository/pgprisma.classroom.repository";
+import { DeleteEnrollmentUseCase } from "../../application/use-cases/delete-enrollment.use-case";
+import { DeleteEnrollmentController } from "../../controller/delete-enrollment.controller";
 const HTTP_PORT = 3333;
 
 const app = express();
@@ -61,16 +63,30 @@ app.delete("/student/:studentId", async (req, res) => {
 app.post("/enrollment", async (req, res) => {
   const pgPrismaStudentRepository = new PGPrismaStudentRepository();
   const pgPrismaEnrollmentRepository = new PGPrismaEnrollmentRepository();
-  const memoryClassroomRepository = new PGPrismaClassroomRepository();
+  const pgPrismaClassroomRepository = new PGPrismaClassroomRepository();
   const useCase = new CreateEnrollmentUseCase(
     pgPrismaStudentRepository,
-    memoryClassroomRepository,
+    pgPrismaClassroomRepository,
     pgPrismaEnrollmentRepository
   );
   const controller = new CreateEnrollmentController(useCase);
 
   const controllerResponse = await controller.execute({
     body: req.body,
+  });
+
+  return res
+    .status(controllerResponse.statusCode)
+    .json(controllerResponse.data);
+});
+
+app.delete("/enrollment/:enrollmentId", async (req, res) => {
+  const pgPrismaEnrollmentRepository = new PGPrismaEnrollmentRepository();
+  const useCase = new DeleteEnrollmentUseCase(pgPrismaEnrollmentRepository);
+  const controller = new DeleteEnrollmentController(useCase);
+
+  const controllerResponse = await controller.execute({
+    params: { path: req.params },
   });
 
   return res

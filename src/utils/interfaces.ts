@@ -32,6 +32,7 @@ export interface ControllerProps {
   params?: {
     path?: {
       studentId?: string;
+      enrollmentId?: string;
     };
     query?: any;
   };
