@@ -2,12 +2,13 @@ import { PrismaClient } from "@prisma/client";
 import Enrollment from "../../core/entity/enrollment.entity";
 import IEnrollmentRepository from "../../core/repository/enrollment.repository";
 import { pgPrismaEnrollmentAdapter } from "../../adapter/pgprisma-enrollment.adapter";
+import { prismaClient } from "../../../prisma/client";
 
 export class PGPrismaEnrollmentRepository implements IEnrollmentRepository {
   private prisma: PrismaClient;
 
   constructor() {
-    this.prisma = new PrismaClient({});
+    this.prisma = prismaClient;
   }
 
   async get(id: string) {

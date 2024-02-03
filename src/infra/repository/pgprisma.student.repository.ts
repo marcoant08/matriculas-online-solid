@@ -2,12 +2,13 @@ import { PrismaClient } from "@prisma/client";
 import Student from "../../core/entity/student.entity";
 import IStudentRepository from "../../core/repository/student.repository";
 import { pgPrismaStudentAdapter } from "../../adapter/pgprisma-student.adapter";
+import { prismaClient } from "../../../prisma/client";
 
 export class PGPrismaStudentRepository implements IStudentRepository {
   private prisma: PrismaClient;
 
   constructor() {
-    this.prisma = new PrismaClient({});
+    this.prisma = prismaClient;
   }
 
   async get(id: string) {
