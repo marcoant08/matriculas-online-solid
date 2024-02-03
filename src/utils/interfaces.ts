@@ -27,7 +27,6 @@ export interface ControllerResponse {
 }
 
 export interface ControllerProps {
-  end?: () => void;
   body?: any;
   params?: {
     path?: {
@@ -37,5 +36,7 @@ export interface ControllerProps {
     };
     query?: any;
   };
-  headers?: any;
+  headers?: {
+    Authentication: string;
+  };
 }

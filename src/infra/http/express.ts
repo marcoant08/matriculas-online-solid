@@ -16,10 +16,12 @@ import { GetEnrollmentsFromClassroomController } from "../../controller/get-enro
 import { GetEnrollmentsFromClassroomUseCase } from "../../application/use-cases/get-enrollments-from-classroom.use-case";
 import { GetClassroomsUseCase } from "../../application/use-cases/get-classrooms.use-case";
 import { GetClassroomsController } from "../../controller/get-classrooms.controller";
+import { authenticationMiddleware } from "../../middleware/authentication";
 const HTTP_PORT = 3333;
 
 const app = express();
 app.use(express.json());
+app.use(authenticationMiddleware);
 
 app.post("/student", async (req, res) => {
   const pgPrismaStudentRepository = new PGPrismaStudentRepository();
