@@ -60,4 +60,4 @@ Para testar e apresentar a cobertura de código (que está 100%), execute os com
 ## Mais
 
 - O banco de dados (PostgreSQL) está configurado pra usar 64MB, esta configuração pode ser alterada em `./postgres_custom/postgresql.conf`
-- O frontend dessa aplicação (feito com Vue.js) está disponível em [matriculas-online-solid](https://github.com/marcoant08/matriculas-online-solid)
+- O frontend dessa aplicação (feito com Vue.js) está disponível em [matriculas-online-vuejs](https://github.com/marcoant08/matriculas-online-vuejs)
