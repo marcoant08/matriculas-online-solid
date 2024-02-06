@@ -1,4 +1,4 @@
-import { UpdateStudentDTO } from "../application/dto/update-user.dto";
+import { UpdateStudentDTO } from "../application/dto/update-student.dto";
 import IUpdateStudentUseCase from "../core/use-case/update-student.use-case";
 import ValidationException from "../utils/exceptions/validation.exception";
 import { ControllerProps, ControllerResponse } from "../utils/interfaces";

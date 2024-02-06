@@ -1,4 +1,4 @@
-import { UpdateStudentDTO } from "../dto/update-user.dto";
+import { UpdateStudentDTO } from "../dto/update-student.dto";
 import Student from "../../core/entity/student.entity";
 import IStudentRepository from "../../core/repository/student.repository";
 import IUpdateStudentUseCase from "../../core/use-case/update-student.use-case";
