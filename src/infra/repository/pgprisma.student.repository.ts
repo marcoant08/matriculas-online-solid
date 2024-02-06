@@ -16,6 +16,11 @@ export class PGPrismaStudentRepository implements IStudentRepository {
     return student ? pgPrismaStudentAdapter(student) : null;
   }
 
+  async getAll() {
+    const students = await this.prisma.student.findMany({});
+    return students.map((student) => pgPrismaStudentAdapter(student));
+  }
+
   async getByAcademicRecord(academicRecord: string) {
     const student = await this.prisma.student.findUnique({
       where: { academic_record: academicRecord },

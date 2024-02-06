@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { PGPrismaStudentRepository } from "../repository/pgprisma.student.repository";
 import { CreateStudentUseCase } from "../../application/use-cases/create-student.use-case";
 import { CreateStudentController } from "../../controller/create-student.controller";
@@ -17,10 +18,15 @@ import { GetEnrollmentsFromClassroomUseCase } from "../../application/use-cases/
 import { GetClassroomsUseCase } from "../../application/use-cases/get-classrooms.use-case";
 import { GetClassroomsController } from "../../controller/get-classrooms.controller";
 import { authenticationMiddleware } from "../../middleware/authentication";
+import { GetStudentController } from "../../controller/get-student.controller";
+import { GetStudentUseCase } from "../../application/use-cases/get-student.use-case";
+import { GetStudentsUseCase } from "../../application/use-cases/get-students.use-case";
+import { GetStudentsController } from "../../controller/get-students.controller";
 const HTTP_PORT = 3333;
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(authenticationMiddleware);
 
 app.post("/student", async (req, res) => {
@@ -30,6 +36,33 @@ app.post("/student", async (req, res) => {
 
   const controllerResponse = await controller.execute({
     body: req.body,
+  });
+
+  return res
+    .status(controllerResponse.statusCode)
+    .json(controllerResponse.data);
+});
+
+app.get("/student", async (_, res) => {
+  const pgPrismaStudentRepository = new PGPrismaStudentRepository();
+  const useCase = new GetStudentsUseCase(pgPrismaStudentRepository);
+  const controller = new GetStudentsController(useCase);
+
+  const controllerResponse = await controller.execute();
+
+  return res
+    .status(controllerResponse.statusCode)
+    .json(controllerResponse.data);
+});
+
+app.get("/student/:studentId", async (req, res) => {
+  const pgPrismaStudentRepository = new PGPrismaStudentRepository();
+  const useCase = new GetStudentUseCase(pgPrismaStudentRepository);
+  const controller = new GetStudentController(useCase);
+
+  const controllerResponse = await controller.execute({
+    body: req.body,
+    params: { path: req.params },
   });
 
   return res

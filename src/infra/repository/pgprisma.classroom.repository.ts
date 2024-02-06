@@ -18,7 +18,7 @@ export class PGPrismaClassroomRepository implements IClassroomRepository {
   }
 
   async getAll() {
-    const clasrooms = await this.prisma.classroom.findMany({});
-    return clasrooms.map((enrollment) => pgPrismaClassroomAdapter(enrollment));
+    const classrooms = await this.prisma.classroom.findMany({});
+    return classrooms.map((enrollment) => pgPrismaClassroomAdapter(enrollment));
   }
 }

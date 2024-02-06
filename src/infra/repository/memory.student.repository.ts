@@ -12,6 +12,10 @@ export class MemoryStudentRepository implements IStudentRepository {
     return student ?? null;
   }
 
+  async getAll() {
+    return this.students;
+  }
+
   async getByAcademicRecord(academicRecord: string) {
     const student = this.students.find((c) => {
       return c.academicRecord === academicRecord;

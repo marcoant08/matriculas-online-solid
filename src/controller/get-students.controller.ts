@@ -1,19 +1,19 @@
-import IGetClassroomsUseCase from "../core/use-case/get-classrooms.use-case";
+import IGetStudentsUseCase from "../core/use-case/get-students.use-case";
 import { ControllerResponse } from "../utils/interfaces";
 
-export class GetClassroomsController {
-  constructor(private readonly getClassroomsUseCase: IGetClassroomsUseCase) {}
+export class GetStudentsController {
+  constructor(private readonly getStudentsUseCase: IGetStudentsUseCase) {}
 
   async execute(): Promise<ControllerResponse> {
     try {
-      const classrooms = await this.getClassroomsUseCase.execute();
+      const students = await this.getStudentsUseCase.execute();
 
       return {
         statusCode: 200,
         data: {
           success: true,
-          message: "Classrooms found successfully",
-          classrooms,
+          message: "Students found successfully",
+          students,
         },
       };
     } catch (e: any) {
