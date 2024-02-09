@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import generateUUID from "../src/utils/functions/generateUUID";
 
 async function main() {
   const userData = {
@@ -25,12 +26,44 @@ async function main() {
     },
   ];
 
+  const studentData = [
+    {
+      id: generateUUID(),
+      name: "Neymar Jr",
+      email: "neymarjr@gmail.com",
+      document_number: "00011122001",
+      academic_record: "001",
+    },
+    {
+      id: generateUUID(),
+      name: "Linus Torvalds",
+      email: "torvalds@hotmail.com",
+      document_number: "00011122002",
+      academic_record: "002",
+    },
+    {
+      id: generateUUID(),
+      name: "Ryan Dahl",
+      email: "ry@outlook.com",
+      document_number: "00011122003",
+      academic_record: "003",
+    },
+    {
+      id: generateUUID(),
+      name: "Marco Antônio",
+      email: "marcoant08@icloud.com",
+      document_number: "00011122003",
+      academic_record: "004",
+    },
+  ];
+
   const prisma = new PrismaClient({});
 
   const userPromise = prisma.user.create({ data: userData });
+  const studentPromise = prisma.student.createMany({ data: studentData });
   const classroomPromise = prisma.classroom.createMany({ data: classroomData });
 
-  await Promise.all([userPromise, classroomPromise])
+  await Promise.all([userPromise, studentPromise, classroomPromise])
     .then(() => {
       console.log("[successfully executed]");
     })
